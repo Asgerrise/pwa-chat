@@ -1,19 +1,14 @@
 import { css } from "@emotion/css";
-import { useEffect, useState } from "react";
-import Localbase from "localbase";
+import { useContext } from "react";
 
 import Message from "./components/Message";
 import MessageInput from "./components/MessageInput";
 
-const Home = () => {
-  const [messageDB, setMessageDB] = useState(null);
+import { MessageContext } from "./contexts/MessageContext";
 
-  useEffect(() => {
-    let db = new Localbase("db");
-    db.collection("messages")
-      .get({ keys: true })
-      .then((messages) => setMessageDB(messages));
-  }, []);
+const Home = () => {
+  const { messageContext } = useContext(MessageContext);
+  const [messageDB] = messageContext;
 
   const style = css`
     display: flex;

@@ -4,6 +4,8 @@ import { Router } from "@reach/router";
 
 import Home from "./Home";
 
+import MessageContextProvider from "./contexts/MessageContext";
+
 injectGlobal`
   * {
     margin: 0;
@@ -18,9 +20,11 @@ injectGlobal`
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Home path="/" />
-      </Router>
+      <MessageContextProvider>
+        <Router>
+          <Home path="/" />
+        </Router>
+      </MessageContextProvider>
     </div>
   );
 }

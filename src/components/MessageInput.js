@@ -1,8 +1,11 @@
 import { css } from "@emotion/css";
-import Localbase from "localbase";
+import { useContext } from "react";
+
+import { MessageContext } from "../contexts/MessageContext";
 
 const MessageInput = () => {
-  let db = new Localbase("db");
+  const { add } = useContext(MessageContext);
+  const addMessage = add;
 
   const style = css`
     width: 100%;
@@ -44,11 +47,14 @@ const MessageInput = () => {
       className={style}
       onSubmit={(e) => {
         e.preventDefault();
-        db.collection("messages").add({ text: e.target.message.value });
+        if (e.target.message.value !== "") {
+          addMessage(e.target.message.value);
+        }
         e.target.message.value = "";
       }}
     >
-      <input name="message" type="text" placeholder="Message..." />
+      <label htmlFor="message" hidden></label>
+      <input id="message" name="message" type="text" placeholder="Message..." />
       <button type="submit">➤</button>
     </form>
   );
