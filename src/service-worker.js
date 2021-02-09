@@ -74,7 +74,7 @@ self.addEventListener("message", (event) => {
   }
 });
 
-precacheAndRoute([{ url: "/offline.html" }, { url: "assets/offline_img.png" }]);
+precacheAndRoute([{ url: "/offline.html" }]);
 
 setDefaultHandler(new NetworkOnly());
 
